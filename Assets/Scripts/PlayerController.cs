@@ -12,19 +12,26 @@ public class PlayerController : MonoBehaviour
     [Header("Camera Settings")]
     [SerializeField] private Camera cam;
     [SerializeField] private float viewHeight;
-    [SerializeField] private Vector3 distanceFromPlayer;
+    [SerializeField] private float distanceFromPlayer;
+    [SerializeField] private float fovMin;
+    [SerializeField] private float fovMax;
+    [SerializeField] private float zoomSpeed;
+    [SerializeField] private float turnSpeed;
+    [SerializeField] private float moveSpeed;
     
     [Header("Player Settings")]
     [SerializeField] private GameObject playerCharacter;
-
+    [SerializeField] private float speed;
+    
     [Header("Events")] 
     public TileSelectedEvent tileSelected;
     public TileSelectedEvent tileHovered;
-    
-    [SerializeField] private float speed;
 
     private Vector3 _targetPosition = Vector3.zero;
     private bool _movementEnabled = false;
+    private Vector3 _mouseLastPosition = Vector3.zero;
+    private Vector3 _turnAxis;
+    private bool _turnAxisLocked;
 
     // Update is called once per frame
     void Update()
@@ -45,16 +52,67 @@ public class PlayerController : MonoBehaviour
 
     void UpdateCamera()
     {
-        Vector3 playerPosition = playerCharacter.transform.position;
-        Vector3 target = new Vector3(
-            playerPosition.x + distanceFromPlayer.x,
-            playerPosition.y + distanceFromPlayer.y,
-            playerPosition.z + distanceFromPlayer.z
-        );
-        cam.transform.position = Vector3.LerpUnclamped(cam.transform.position, target, (Time.deltaTime * speed/3));
+        // Zoom controls.
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            cam.fieldOfView += zoomSpeed;
+            cam.fieldOfView = Mathf.Clamp(cam.fieldOfView, fovMin, fovMax);
+        }
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            cam.fieldOfView -= zoomSpeed;
+            cam.fieldOfView = Mathf.Clamp(cam.fieldOfView, fovMin, fovMax);
+        }
         
-        Quaternion rot = Quaternion.LookRotation(playerPosition - cam.transform.position, Vector3.up);
-        cam.transform.rotation = rot;
+        // Camera spring control.
+        Vector3 playerPosition = playerCharacter.transform.position;
+        Vector3 target = playerPosition * distanceFromPlayer;
+        cam.transform.position = Vector3.MoveTowards(cam.transform.position, target, Time.deltaTime * moveSpeed);
+        cam.transform.LookAt(playerPosition);
+        
+        // Orbit controls.
+        if (Input.GetMouseButton(1))
+        {
+            float centerX = Screen.width / 2f;
+            float centerY = Screen.height / 2f;
+            Vector3 mousePosition = new Vector3(Input.mousePosition.x - centerX, Input.mousePosition.y - centerY);
+            
+            if (!_turnAxisLocked)
+            {
+                float upDot = Vector3.Dot(mousePosition.normalized, Vector3.up);
+                float rightDot = Vector3.Dot(mousePosition.normalized, Vector3.right);
+                if (Mathf.Abs(upDot) > Mathf.Abs(rightDot))
+                {
+                    if (rightDot > 0)
+                    {
+                        _turnAxis = Vector3.right;    
+                    }
+                    else
+                    {
+                        _turnAxis = Vector3.left;
+                    }
+                }
+                else
+                {
+                    if (rightDot > 0)
+                    {
+                        _turnAxis = Vector3.up;    
+                    }
+                    else
+                    {
+                        _turnAxis = Vector3.down;
+                    }
+                }
+                _turnAxisLocked = true;
+            }
+
+            cam.transform.RotateAround(playerPosition, _turnAxis, turnSpeed);
+            _mouseLastPosition = mousePosition;
+        }
+        else
+        {
+            _turnAxisLocked = false;
+        }
     }
 
     void OnHover()
