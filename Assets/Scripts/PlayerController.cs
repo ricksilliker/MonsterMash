@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
+
+[System.Serializable]
+public class TileSelectedEvent : UnityEvent<Vector3> {};
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,29 +17,28 @@ public class PlayerController : MonoBehaviour
     [Header("Player Settings")]
     [SerializeField] private GameObject playerCharacter;
 
+    [Header("Events")] 
+    public TileSelectedEvent tileSelected;
+    public TileSelectedEvent tileHovered;
+    
     [SerializeField] private float speed;
 
-    private bool _walk;
-    private Vector3 _newPlayerPosition;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private Vector3 _targetPosition = Vector3.zero;
+    private bool _movementEnabled = false;
 
     // Update is called once per frame
     void Update()
     {
+        OnHover();
         GetInputPosition();
-        if (_walk)
+        if (_movementEnabled)
         {
-            Vector3 newDirection = _newPlayerPosition - playerCharacter.transform.position;
-            playerCharacter.transform.Translate(newDirection.normalized * (speed * Time.deltaTime));    
-        }
-        if (Vector3.Distance(_newPlayerPosition, playerCharacter.transform.position) < 0.5f)
-        {
-            _walk = false;
+            float step = speed * Time.deltaTime;
+            playerCharacter.transform.position = Vector3.MoveTowards(playerCharacter.transform.position, _targetPosition, step);
+            if (Vector3.Distance(playerCharacter.transform.position, _targetPosition) < 0.001f)
+            {
+                _movementEnabled = false;
+            }
         }
         UpdateCamera();
     }
@@ -54,6 +57,20 @@ public class PlayerController : MonoBehaviour
         cam.transform.rotation = rot;
     }
 
+    void OnHover()
+    {
+        RaycastHit hit;
+        Ray userRay = cam.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(userRay, out hit, 100))
+        {
+            Tile selectedTile = hit.transform.GetComponent<Tile>();
+            if (selectedTile)
+            {
+                tileHovered.Invoke(selectedTile.GetTilePosition());
+            }
+        }
+    }
+    
     void GetInputPosition()
     {
         if (Input.GetMouseButton(0))
@@ -62,40 +79,14 @@ public class PlayerController : MonoBehaviour
             Ray userRay = cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(userRay, out hit, 100))
             {
-                Debug.DrawRay(userRay.origin, userRay.direction, Color.red, 10f);
-                _newPlayerPosition = hit.point;
-                _walk = true;
+                Tile selectedTile = hit.transform.GetComponent<Tile>();
+                if (selectedTile)
+                {
+                    _targetPosition = selectedTile.GetTilePosition();
+                    _movementEnabled = true;
+                    tileSelected.Invoke(_targetPosition);
+                }
             }
         }
-    }
-    
-    Vector3 GetInputTranslationDirection()
-    {
-        Vector3 direction = new Vector3();
-        if (Input.GetKey(KeyCode.W))
-        {
-            direction += Vector3.forward;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            direction += Vector3.back;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            direction += Vector3.left;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            direction += Vector3.right;
-        }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            direction += Vector3.down;
-        }
-        if (Input.GetKey(KeyCode.E))
-        {
-            direction += Vector3.up;
-        }
-        return direction;
     }
 }
