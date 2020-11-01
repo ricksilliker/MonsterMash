@@ -20,12 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b15ffdce-7db1-488a-8414-f5383ba2857c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MonsterMash/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MonsterMash/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Levels/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Levels/Main.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/HDRPDefaultResources/HDRPDefaultSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StarterAssets/HDRPDefaultResources/HDRPDefaultSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/Settings/HDRenderPipelineAsset.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StarterAssets/Settings/HDRenderPipelineAsset.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +33,11 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/ricks/Projects/MonsterMash/Assets/Scripts/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/ricks/Projects/MonsterMash/Assets/Scripts/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SelectionTool.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TileManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/ricks/Projects/MonsterMash/Assets/Scripts/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -46,8 +46,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Tile.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SelectionTool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HoverTool.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
       </list>
     </option>
   </component>
@@ -95,7 +95,7 @@
       <option name="presentableId" value="Default" />
       <updated>1603338859561</updated>
       <workItem from="1603338891571" duration="5705000" />
-      <workItem from="1604114340756" duration="14650000" />
+      <workItem from="1604114340756" duration="22577000" />
     </task>
     <servers />
   </component>
@@ -119,6 +119,10 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="92" y="92" width="1736" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1604201233613">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="92" y="92" width="1736" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1604201233613" />
     <state x="616" y="250" key="run.anything.popup" timestamp="1604115678696">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

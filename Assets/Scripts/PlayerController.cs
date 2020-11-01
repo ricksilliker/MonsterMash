@@ -29,11 +29,17 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 _targetPosition = Vector3.zero;
     private bool _movementEnabled = false;
-    private Vector3 _mouseLastPosition = Vector3.zero;
-    private Vector3 _turnAxis;
-    private bool _turnAxisLocked;
+    private Vector3 _turnAxis = Vector3.up;
+    private Transform _cameraOffset;
+    private Vector3 _lastMousePosition = Vector3.zero;
+    private Vector3 _mouseStartPosition = Vector3.zero;
 
-    // Update is called once per frame
+    void Start()
+    {
+        _cameraOffset = cam.transform.parent.transform;
+        cam.transform.RotateAround(playerCharacter.transform.position, Vector3.right, viewHeight);
+    }
+    
     void Update()
     {
         OnHover();
@@ -66,53 +72,44 @@ public class PlayerController : MonoBehaviour
         
         // Camera spring control.
         Vector3 playerPosition = playerCharacter.transform.position;
-        Vector3 target = playerPosition * distanceFromPlayer;
-        cam.transform.position = Vector3.MoveTowards(cam.transform.position, target, Time.deltaTime * moveSpeed);
-        cam.transform.LookAt(playerPosition);
-        
+        _cameraOffset.position = Vector3.MoveTowards(_cameraOffset.position, playerPosition, moveSpeed * Time.deltaTime);
+
         // Orbit controls.
+        // if (Input.GetMouseButtonDown(1))
+        // {            
+        //     float centerX = Screen.width / 2f;
+        //     float centerY = Screen.height / 2f;
+        //     _mouseStartPosition = new Vector3(Input.mousePosition.x - centerX, Input.mousePosition.y - centerY);
+        // }
+        
+        float centerX = Screen.width / 2f;
+        float centerY = Screen.height / 2f;
+        Vector3 mousePosition = new Vector3(Input.mousePosition.x - centerX, Input.mousePosition.y - centerY);
+        
         if (Input.GetMouseButton(1))
         {
-            float centerX = Screen.width / 2f;
-            float centerY = Screen.height / 2f;
-            Vector3 mousePosition = new Vector3(Input.mousePosition.x - centerX, Input.mousePosition.y - centerY);
+            // float centerX = Screen.width / 2f;
+            // float centerY = Screen.height / 2f;
+            // Vector3 mousePosition = new Vector3(Input.mousePosition.x - centerX, Input.mousePosition.y - centerY);
             
-            if (!_turnAxisLocked)
+            float rightDot = Vector3.Dot((mousePosition - _lastMousePosition).normalized, Vector3.right);
+            
+            if (rightDot < 0)
             {
-                float upDot = Vector3.Dot(mousePosition.normalized, Vector3.up);
-                float rightDot = Vector3.Dot(mousePosition.normalized, Vector3.right);
-                if (Mathf.Abs(upDot) > Mathf.Abs(rightDot))
-                {
-                    if (rightDot > 0)
-                    {
-                        _turnAxis = Vector3.right;    
-                    }
-                    else
-                    {
-                        _turnAxis = Vector3.left;
-                    }
-                }
-                else
-                {
-                    if (rightDot > 0)
-                    {
-                        _turnAxis = Vector3.up;    
-                    }
-                    else
-                    {
-                        _turnAxis = Vector3.down;
-                    }
-                }
-                _turnAxisLocked = true;
+                cam.transform.RotateAround(playerPosition, Vector3.down, turnSpeed);
+                _turnAxis = Vector3.down;
+            } else if (rightDot > 0)
+            {
+                cam.transform.RotateAround(playerPosition, Vector3.up, turnSpeed);            }
+            else
+            {
+                _turnAxis = _turnAxis;
+                
             }
-
-            cam.transform.RotateAround(playerPosition, _turnAxis, turnSpeed);
-            _mouseLastPosition = mousePosition;
+            
         }
-        else
-        {
-            _turnAxisLocked = false;
-        }
+        
+        _lastMousePosition = mousePosition;
     }
 
     void OnHover()
