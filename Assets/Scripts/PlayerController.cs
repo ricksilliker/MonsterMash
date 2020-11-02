@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player Settings")]
     [SerializeField] private GameObject playerCharacter;
     [SerializeField] private float speed;
+    [SerializeField] private LayerMask tileLayer;
     
     [Header("Events")] 
     public TileSelectedEvent tileSelected;
@@ -29,10 +30,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 _targetPosition = Vector3.zero;
     private bool _movementEnabled = false;
-    private Vector3 _turnAxis = Vector3.up;
     private Transform _cameraOffset;
     private Vector3 _lastMousePosition = Vector3.zero;
-    private Vector3 _mouseStartPosition = Vector3.zero;
 
     void Start()
     {
@@ -75,13 +74,6 @@ public class PlayerController : MonoBehaviour
         _cameraOffset.position = Vector3.MoveTowards(_cameraOffset.position, playerPosition, moveSpeed * Time.deltaTime);
 
         // Orbit controls.
-        // if (Input.GetMouseButtonDown(1))
-        // {            
-        //     float centerX = Screen.width / 2f;
-        //     float centerY = Screen.height / 2f;
-        //     _mouseStartPosition = new Vector3(Input.mousePosition.x - centerX, Input.mousePosition.y - centerY);
-        // }
-        
         float centerX = Screen.width / 2f;
         float centerY = Screen.height / 2f;
         Vector3 mousePosition = new Vector3(Input.mousePosition.x - centerX, Input.mousePosition.y - centerY);
@@ -97,16 +89,11 @@ public class PlayerController : MonoBehaviour
             if (rightDot < 0)
             {
                 cam.transform.RotateAround(playerPosition, Vector3.down, turnSpeed);
-                _turnAxis = Vector3.down;
             } else if (rightDot > 0)
             {
-                cam.transform.RotateAround(playerPosition, Vector3.up, turnSpeed);            }
-            else
-            {
-                _turnAxis = _turnAxis;
+                cam.transform.RotateAround(playerPosition, Vector3.up, turnSpeed);
                 
             }
-            
         }
         
         _lastMousePosition = mousePosition;
@@ -116,7 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit hit;
         Ray userRay = cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(userRay, out hit, 100))
+        if (Physics.Raycast(userRay, out hit, 100, tileLayer))
         {
             Tile selectedTile = hit.transform.GetComponent<Tile>();
             if (selectedTile)
@@ -132,7 +119,7 @@ public class PlayerController : MonoBehaviour
         {
             RaycastHit hit;
             Ray userRay = cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(userRay, out hit, 100))
+            if (Physics.Raycast(userRay, out hit, 100, tileLayer))
             {
                 Tile selectedTile = hit.transform.GetComponent<Tile>();
                 if (selectedTile)
