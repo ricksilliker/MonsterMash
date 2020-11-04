@@ -5,13 +5,14 @@ public class SelectionTool : MonoBehaviour
     private void OnEnable()
     {
         PlayerController controller = FindObjectOfType<PlayerController>();
-        controller.tileSelected.AddListener(OnSelectionChanged);
+        controller.actionX.AddListener(OnSelectionChanged);
     }
 
     private void OnDisable()
     {
         PlayerController controller = FindObjectOfType<PlayerController>();
-        controller.tileSelected.RemoveListener(OnSelectionChanged);    }
+        controller.actionX.RemoveListener(OnSelectionChanged);    
+    }
 
     private void OnSelectionChanged(Vector3 position)
     {

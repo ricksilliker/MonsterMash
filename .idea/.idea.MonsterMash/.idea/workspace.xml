@@ -23,9 +23,22 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MonsterMash/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MonsterMash/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MonsterMash/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MonsterMash/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Levels/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Levels/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/TilePiece.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/TilePiece.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Player_MAT.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Player_MAT.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Tile_MAT.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Tile_MAT.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Wall_MAT.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Wall_MAT.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Goblin.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Goblin.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Goblin.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Goblin.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HoverTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HoverTool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Item.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerCharacter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerCharacter.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TileManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SelectionTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SelectionTool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Wall.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Wall.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,15 +59,20 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Tile.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/SelectionTool.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HoverTool.cs" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TileManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Wall.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerCharacter.cs" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Wall.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CharacterProp.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/NPC.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PC.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Tile.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Item.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HoverTool.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SelectionTool.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SelectUnitTool.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
       </list>
     </option>
   </component>
@@ -102,7 +120,7 @@
       <option name="presentableId" value="Default" />
       <updated>1603338859561</updated>
       <workItem from="1603338891571" duration="5705000" />
-      <workItem from="1604114340756" duration="30963000" />
+      <workItem from="1604114340756" duration="48636000" />
     </task>
     <servers />
   </component>
@@ -126,6 +144,10 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="92" y="92" width="1736" height="896" key="VCS.FileHistoryDialog" timestamp="1604456469888">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="92" y="92" width="1736" height="896" key="VCS.FileHistoryDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1604456469888" />
     <state x="92" y="92" width="1736" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1604201233613">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -138,5 +160,24 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1604284585509" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/PlayerController.cs</url>
+          <line>65</line>
+          <properties documentPath="C:\Users\ricks\Projects\MonsterMash\Assets\Scripts\PlayerController.cs" initialLine="49">
+            <startOffsets>
+              <option value="1866" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1867" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -11,7 +11,7 @@ public class Wall : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
-        player = FindObjectOfType<PlayerCharacter>().gameObject;
+        player = FindObjectOfType<PC>().gameObject;
         mesh = GetComponentInChildren<MeshRenderer>();
     }
     

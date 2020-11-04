@@ -1,23 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
+
 [System.Serializable]
-public class TileSelectedEvent : UnityEvent<Vector3> {};
+public class SelectPointEvent : UnityEvent<Vector3> {};
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Camera Settings")]
     [SerializeField] private Camera cam;
-    [SerializeField] private float viewHeight;
-    [SerializeField] private float distanceFromPlayer;
     [SerializeField] private float fovMin;
     [SerializeField] private float fovMax;
     [SerializeField] private float zoomSpeed;
-    [SerializeField] private float turnSpeed;
-    [SerializeField] private float moveSpeed;
     
     [Header("Player Settings")]
     [SerializeField] private GameObject playerCharacter;
@@ -25,24 +19,49 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask tileLayer;
     
     [Header("Events")] 
-    public TileSelectedEvent tileSelected;
-    public TileSelectedEvent tileHovered;
+    public SelectPointEvent actionX;
+    public SelectPointEvent tileHovered;
 
     private Vector3 _targetPosition = Vector3.zero;
     private bool _movementEnabled = false;
     private Transform _cameraOffset;
-    private Vector3 _lastMousePosition = Vector3.zero;
+    private NPC _selectedNPC;
 
-    void Start()
+    private void OnEnable()
     {
-        _cameraOffset = cam.transform.parent.transform;
-        cam.transform.RotateAround(playerCharacter.transform.position, Vector3.right, viewHeight);
+        FindObjectOfType<SelectUnitTool>().npcSelected.AddListener(SetActiveNPC);
+    }
+
+    private void OnDisable()
+    {
+        FindObjectOfType<SelectUnitTool>().npcSelected.RemoveListener(SetActiveNPC);
+    }
+
+    private void SetActiveNPC(NPC pawn)
+    {
+        _selectedNPC = pawn;
     }
     
-    void Update()
+    private void Update()
     {
-        OnHover();
-        GetInputPosition();
+        RaycastHit hit;
+        Ray userRay = cam.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(userRay, out hit, 100, tileLayer))
+        {
+            Tile selectedTile = hit.transform.GetComponent<Tile>();
+            if (selectedTile)
+            {
+                tileHovered.Invoke(selectedTile.GetTilePosition());
+            }
+            
+            if (Input.GetMouseButton(0) && selectedTile)
+            {
+                _targetPosition = selectedTile.GetTilePosition();
+                // _movementEnabled = true;
+                actionX.Invoke(_targetPosition);
+            }
+        }
+
         if (_movementEnabled)
         {
             float step = speed * Time.deltaTime;
@@ -55,7 +74,7 @@ public class PlayerController : MonoBehaviour
         UpdateCamera();
     }
 
-    void UpdateCamera()
+    private void UpdateCamera()
     {
         // Zoom controls.
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
@@ -69,66 +88,5 @@ public class PlayerController : MonoBehaviour
             cam.fieldOfView = Mathf.Clamp(cam.fieldOfView, fovMin, fovMax);
         }
         
-        // Camera spring control.
-        Vector3 playerPosition = playerCharacter.transform.position;
-        _cameraOffset.position = Vector3.MoveTowards(_cameraOffset.position, playerPosition, moveSpeed * Time.deltaTime);
-
-        // Orbit controls.
-        float centerX = Screen.width / 2f;
-        float centerY = Screen.height / 2f;
-        Vector3 mousePosition = new Vector3(Input.mousePosition.x - centerX, Input.mousePosition.y - centerY);
-        
-        if (Input.GetMouseButton(1))
-        {
-            // float centerX = Screen.width / 2f;
-            // float centerY = Screen.height / 2f;
-            // Vector3 mousePosition = new Vector3(Input.mousePosition.x - centerX, Input.mousePosition.y - centerY);
-            
-            float rightDot = Vector3.Dot((mousePosition - _lastMousePosition).normalized, Vector3.right);
-            
-            if (rightDot < 0)
-            {
-                cam.transform.RotateAround(playerPosition, Vector3.down, turnSpeed);
-            } else if (rightDot > 0)
-            {
-                cam.transform.RotateAround(playerPosition, Vector3.up, turnSpeed);
-                
-            }
-        }
-        
-        _lastMousePosition = mousePosition;
-    }
-
-    void OnHover()
-    {
-        RaycastHit hit;
-        Ray userRay = cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(userRay, out hit, 100, tileLayer))
-        {
-            Tile selectedTile = hit.transform.GetComponent<Tile>();
-            if (selectedTile)
-            {
-                tileHovered.Invoke(selectedTile.GetTilePosition());
-            }
-        }
-    }
-    
-    void GetInputPosition()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            RaycastHit hit;
-            Ray userRay = cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(userRay, out hit, 100, tileLayer))
-            {
-                Tile selectedTile = hit.transform.GetComponent<Tile>();
-                if (selectedTile)
-                {
-                    _targetPosition = selectedTile.GetTilePosition();
-                    _movementEnabled = true;
-                    tileSelected.Invoke(_targetPosition);
-                }
-            }
-        }
     }
 }

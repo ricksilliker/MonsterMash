@@ -8,12 +8,14 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
-          <e p="Enemy.cs" t="Include" />
+          <e p="CharacterProp.cs" t="Include" />
           <e p="HoverTool.cs" t="Include" />
           <e p="Item.cs" t="Include" />
-          <e p="PlayerCharacter.cs" t="Include" />
+          <e p="NPC.cs" t="Include" />
+          <e p="PC.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
           <e p="SelectionTool.cs" t="Include" />
+          <e p="SelectUnitTool.cs" t="Include" />
           <e p="Tile.cs" t="Include" />
           <e p="TileManager.cs" t="Include" />
           <e p="ToolManager.cs" t="Include" />

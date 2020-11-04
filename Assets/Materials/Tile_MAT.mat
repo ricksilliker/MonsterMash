@@ -503,7 +503,7 @@ Material:
     - _MaterialID: 1
     - _MaterialTilingU: 1
     - _MaterialTilingV: 1
-    - _Metallic: 0
+    - _Metallic: 0.728
     - _Metallic0: 0
     - _Metallic1: 0
     - _Metallic2: 0
@@ -535,7 +535,7 @@ Material:
     - _SVBRDF_BRDFVariants: 0
     - _SVBRDF_HeightMapMaxMM: 0
     - _SVBRDF_SpecularLobeMapScale: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 0.355
     - _Smoothness0: 0.5
     - _Smoothness1: 0.5
     - _Smoothness2: 0.5

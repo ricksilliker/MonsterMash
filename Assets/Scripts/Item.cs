@@ -18,10 +18,10 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerCharacter player = other.GetComponent<PlayerCharacter>();
+        PC player = other.GetComponent<PC>();
         if (player)
         {
-            player.Feed(Energy);
+            // player.Feed(Energy);
             Eat();
         }
     }

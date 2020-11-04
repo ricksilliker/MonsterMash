@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCharacter : MonoBehaviour
+public class PC : MonoBehaviour
 {
     [SerializeField] private float stamina;
     
-    public void Feed(float energy)
+    public void Feed(NPC pawn, float energy)
     {
-        stamina += energy;
+        pawn.HitPoints += energy;
     }
 }

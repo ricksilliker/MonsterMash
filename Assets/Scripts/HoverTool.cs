@@ -11,7 +11,9 @@ public class HoverTool : MonoBehaviour
     private void OnDisable()
     {
         PlayerController controller = FindObjectOfType<PlayerController>();
-        controller.tileHovered.RemoveListener(OnSelectionChanged);    }
+        controller.tileHovered.RemoveListener(OnSelectionChanged);
+        
+    }
 
     private void OnSelectionChanged(Vector3 position)
     {
